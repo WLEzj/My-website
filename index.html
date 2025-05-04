@@ -22,6 +22,35 @@
         display: block;
         margin: 0 auto;
       }
+	.content{
+    	text-align:center;
+    	color:red;
+    	font-size:15px;
+    	line-height:1.7;
+    	padding:15px;
+    	margin:30px auto;
+    	max-margin:700px;
+	}
+	.ability{
+	display:inline-block;
+	height:300px
+	}
+      @media (max-width:600px){
+	.ability{
+	display:inline-block;
+	height:120px
+	}
+	.content{
+    	text-align:center;
+    	color:red;
+    	font-size:7px;
+    	line-height:1.7;
+    	padding:15px;
+    	margin:30px auto;
+    	max-margin:700px;
+	}
+      }
+      }
     </style>
   </head>
   <body>
@@ -33,15 +62,7 @@
     ">
       <img src="https://i.imgs.ovh/2025/03/02/7XtjH.png" alt="foxdog" height=250px>
     </div>
-    <div style="
-    text-align:center;
-    color:red;
-    font-size:15px;
-    line-height:1.7;
-    padding:15px;
-    margin:30px auto;
-    max-margin:700px;
-    ">
+    <div class="content">
     <p>我叫曹扬</p>
     <p>我是山西忻州人，现就读于武汉理工大学日语系，毕业于中青基础班的一叶舟。</p>
     <p>我是个十足的I人和J人，内向沉稳，喜欢统计整理。</p>
@@ -55,7 +76,7 @@
     padding:10px;
     text-align: center;
     ">
-      <img src="https://i.imgs.ovh/2025/03/02/7XK6U.jpeg" alt="skill" style="display: inline-block;height:200px">
+      <img src="https://i.imgs.ovh/2025/03/02/7XK6U.jpeg" alt="skill" class="ability">
     </div>
     <div style="
     text-align:center;
