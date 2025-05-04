@@ -7,15 +7,38 @@
     <style>
       p{
         color: #ff0086cf;
-        width: 720px;
-        height: 80px;
-        font-size: 50px;
+        height: auto;
+        margin: 5px 5px;
+        font-size: 12px;
         background-color: #c9bed38a;
         border-color: blue;
         border-bottom-width: thick;
       }
       #one{color:red;}
       .two{color:green;}
+      .left{
+        float: left;
+        width:33%;
+      }
+      .center{
+        float: center;
+        width:33%;
+      }
+      .right{
+        float: right;
+        width:33%;
+      }
+      .content{
+        width:100%;
+        display: flex;
+      }
+      @media (max-width:600px) {
+        .content{
+          width:100%;
+          display: flex;
+          flex-direction:column;
+        }
+      }
     </style>
   </head>
   <body style="
@@ -33,22 +56,31 @@
   <!--justify-content:center;内容居中，flex-end内容靠后-->
     <div style="
       background-color:#f1f1f1;
-      height:250px;
-      width:50%;
+      height:200px;
+      width:100%;
       display:flex;
       flex-direction:row;
       align-items:flex-end;
       justify-content:center;
     ">
-      <img src="https://i.imgs.ovh/2025/03/02/7XtjH.png" alt="7XtjH.png" border="0" height=250px>
+      <img src="https://i.imgs.ovh/2025/03/02/7XtjH.png" alt="7XtjH.png" border="0" height=200px>
     </div>
-    <div>
-      <p>竹室生虚白</p>
-      <p>兰阶扫落红</p>
-      <p id="one">一片东风吹艳雪</p>
-      <p id="one">几声细雨洗霜华</p>
-      <p class=two>小辟桃源，妙手当年曾画日</p>
-      <p class="two">横辟松径，何人此地又劳神</p>
+    <div class="content">
+      <div class="left">
+        <p style="font-size: large;color: black;background-color: white;">诗</p>
+        <p>《望武汉长江大桥有感》<br>西岸日斜风骤起<br>仙人桥畔独登楼<br>横天一片金鳞路<br>截海三分银栈丘<br>浩浩龙骧长去后<br>纷纷桂棹竞争流<br>莫叹往昔繁华逝<br>江水滔滔永不休<br></p>
+      </div>
+      <div class="center">
+        <p style="font-size: large;color: black;background-color: white;">词</p>
+        <p>《踏莎行·返校途中恨闲来锦书之遗》<br>瑞雪临窗，文灯坠树。<br>梅花总是乘风旅。<br>长亭几度望天边，<br>不知鸿雁云中语。<br><br>海破残阳，波传柳絮。<br>逐光追日匆匆路。<br>温情早伴梦舟来，<br>何需尺素真容睹。</p>
+      </div>
+      <div class="right">
+        <p style="font-size: large;color: black;background-color: white;">联</p>
+        <p>竹室生虚白<br>兰阶扫落红</p>
+        <p id="one">一片东风吹艳雪<br>几声细雨洗霜华</p>
+        <p class=two>小辟桃源，妙手当年曾画日<br>横辟松径，何人此地又劳神</p>
+      </div>
+    </div>
     </div>
   </body>
 </html>
