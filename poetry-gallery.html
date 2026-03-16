@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的诗词联作品集</title>
+    <!-- 引入Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 配置Tailwind自定义颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6', // 主色调：紫色，代表创意与灵感
+                        secondary: '#EC4899', // 辅助色：粉色，增添活力
+                        accent: '#06B6D4', // 强调色：青色，提供对比
+                        classic: '#C87941', // 古典色：棕色，呼应传统诗词
+                        light: '#F9FAFB',
+                        dark: '#1F2937'
+                    },
+                    fontFamily: {
+                        poetry: ['"Noto Serif SC"', 'serif'],
+                        title: ['"Noto Sans SC"', 'sans-serif']
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- 自定义工具类 -->
+    <style>
+        .content-auto {
+            content-visibility: auto;
+        }
+
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .poetry-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.1);
+            transition: transform 300ms ease, box-shadow 300ms ease;
+        }
+
+        .poetry-card:hover {
+            transform: translateY(-0.25rem);
+            box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+        }
+
+        .section-divider {
+            width: 6rem;
+            height: 0.25rem;
+            margin: 3rem auto;
+            border-radius: 9999px;
+        }
+    </style>
+    <!-- 引入中文字体 -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* 全局动画定义 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        
+        /* 滚动条美化 */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #8B5CF6;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #7C3AED;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-purple-50 min-h-screen font-poetry text-dark">
+    <!-- 导航栏 -->
+    <header class="fixed w-full z-50 transition-all duration-300" id="navbar">
+        <nav class="bg-white/90 backdrop-blur-md shadow-sm py-4 px-6 md:px-12">
+            <div class="container mx-auto flex justify-between items-center">
+                <h1 class="text-2xl md:text-3xl font-title font-bold text-primary flex items-center">
+                    <i class="fa fa-book mr-3 text-classic"></i>
+                    <span>诗词联集</span>
+                </h1>
+                
+                <div class="flex items-center space-x-4">
+                    <button id="addPoemBtn" class="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg transition-all flex items-center shadow-md hover:shadow-lg">
+                        <i class="fa fa-plus mr-2"></i>
+                        <span class="hidden sm:inline">添加作品</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="container mx-auto px-4 pt-28 pb-20">
+        <!-- 欢迎区域 -->
+        <section class="text-center mb-20 animate-fadeInUp">
+            <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-title font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary mb-6 text-shadow">
+                我的诗词联作品集
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto text-lg md:text-xl">
+                记录生活中的点滴感悟，留存岁月里的诗意情怀。这里是我的创作天地，每一篇作品都承载着独特的心境与故事。
+            </p>
+        </section>
+
+        <section class="mb-12 animate-fadeInUp delay-100">
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-white/60 p-4 md:p-6">
+                <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                    <div class="flex-1">
+                        <label for="searchInput" class="block text-sm text-gray-600 mb-2">搜索作品</label>
+                        <div class="relative">
+                            <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                            <input id="searchInput" type="search" class="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary bg-white/90" placeholder="按标题、内容、类型搜索">
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-56">
+                        <label for="sortOrder" class="block text-sm text-gray-600 mb-2">日期排序</label>
+                        <select id="sortOrder" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary bg-white/90">
+                            <option value="date-desc">从新到旧</option>
+                            <option value="date-asc">从旧到新</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button id="resetFiltersBtn" type="button" class="w-full lg:w-auto px-4 py-3 rounded-xl border border-gray-200 text-gray-600 hover:text-primary hover:border-primary transition-colors">
+                            清空筛选
+                        </button>
+                    </div>
+                </div>
+                <div id="syncStatus" class="mt-4 rounded-xl px-4 py-3 text-sm bg-slate-100 text-slate-600">
+                    正在连接档案库...
+                </div>
+            </div>
+        </section>
+
+        <!-- 诗词区域1：现代诗 -->
+        <section class="mb-24 animate-fadeInUp delay-100">
+            <div class="flex flex-col items-center mb-10">
+                <h3 class="text-[clamp(1.5rem,3vw,2.5rem)] font-title font-bold text-primary mb-4">诗</h3>
+                <div class="section-divider bg-primary"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="modernPoems">
+                <!-- 作品卡片1 -->
+                <div class="poetry-card border-t-4 border-primary">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-primary">夜难寐</h4>
+                        <span class="text-sm text-gray-500">2024.11.03</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        岁末辛劳晚，寒衾入睡迟。<br>
+                        凄风冰雨夜，冻雪冷霜时。<br>
+                        亘古须臾客，言愁未免痴。<br>
+                        明朝应好日，切莫再凝眉。<br>
+                    </p>
+                    <div class="flex justify-end text-primary">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                </div>
+                
+                <!-- 作品卡片2 -->
+                <div class="poetry-card border-t-4 border-primary">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-primary">冰花</h4>
+                        <span class="text-sm text-gray-500">2025.01.28</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        寒夜霜风乱，清晨冻雪临。<br>
+                        冰花凭自起，连理满窗林。<br>
+                    </p>
+                    <div class="flex justify-end text-primary">
+                        <i class="fa fa-umbrella"></i>
+                    </div>
+                </div>
+                
+                <!-- 作品卡片3 -->
+                <div class="poetry-card border-t-4 border-primary">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-primary">金鱼</h4>
+                        <span class="text-sm text-gray-500">2025.07.11</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        水声终不绝，家有一池鱼。<br>
+                        似玉两睛闪，如纱双尾虚。<br>
+                        金鳞翻浪跃，丹觜傍沙嘘。<br>
+                        食饵争浮上，厌厌鼓腹初。<br>
+                    </p>
+                    <div class="flex justify-end text-primary">
+                        <i class="fa fa-building"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 诗词区域2：古典诗词 -->
+        <section class="mb-24 animate-fadeInUp delay-200">
+            <div class="flex flex-col items-center mb-10">
+                <h3 class="text-[clamp(1.5rem,3vw,2.5rem)] font-title font-bold text-classic mb-4">词</h3>
+                <div class="section-divider bg-classic"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="classicPoems">
+                <!-- 作品卡片1 -->
+                <div class="poetry-card border-t-4 border-classic bg-amber-50/80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-classic">春日偶成</h4>
+                        <span class="text-sm text-gray-500">2023.03.15</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-center">
+                        （在此处填写您的古典诗词内容）
+                    </p>
+                    <div class="flex justify-end text-classic">
+                        <i class="fa fa-pagelines"></i>
+                    </div>
+                </div>
+                
+                <!-- 作品卡片2 -->
+                <div class="poetry-card border-t-4 border-classic bg-amber-50/80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-classic">中秋望月</h4>
+                        <span class="text-sm text-gray-500">2022.09.10</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-center">
+                        （在此处填写您的古典诗词内容）
+                    </p>
+                    <div class="flex justify-end text-classic">
+                        <i class="fa fa-moon-o"></i>
+                    </div>
+                </div>
+                
+                <!-- 作品卡片3 -->
+                <div class="poetry-card border-t-4 border-classic bg-amber-50/80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-classic">客行</h4>
+                        <span class="text-sm text-gray-500">2023.01.28</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-center">
+                        （在此处填写您的古典诗词内容）
+                    </p>
+                    <div class="flex justify-end text-classic">
+                        <i class="fa fa-road"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 诗词区域3：对联 -->
+        <section class="mb-16 animate-fadeInUp delay-300">
+            <div class="flex flex-col items-center mb-10">
+                <h3 class="text-[clamp(1.5rem,3vw,2.5rem)] font-title font-bold text-secondary mb-4">楹联</h3>
+                <div class="section-divider bg-secondary"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="couplets">
+                <div class="poetry-card border-t-4 border-secondary bg-pink-50/80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-secondary">书房联</h4>
+                        <span class="text-sm text-gray-500">2023.02.05</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-2 text-right">（上联内容）</p>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-left">（下联内容）</p>
+                    <div class="flex justify-end text-secondary">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                </div>
+
+                <div class="poetry-card border-t-4 border-secondary bg-pink-50/80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-secondary">新春联</h4>
+                        <span class="text-sm text-gray-500">2023.01.10</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-2 text-right">（上联内容）</p>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-left">（下联内容）</p>
+                    <div class="flex justify-end text-secondary">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                </div>
+
+                <div class="poetry-card border-t-4 border-secondary bg-pink-50/80">
+                    <div class="flex justify-between items-start mb-4">
+                        <h4 class="text-xl font-bold text-secondary">山水联</h4>
+                        <span class="text-sm text-gray-500">2022.10.03</span>
+                    </div>
+                    <p class="text-gray-700 leading-relaxed mb-2 text-right">（上联内容）</p>
+                    <p class="text-gray-700 leading-relaxed mb-4 text-left">（下联内容）</p>
+                    <div class="flex justify-end text-secondary">
+                        <i class="fa fa-pencil"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 添加新作品的模态框 -->
+        <div id="addPoemModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-2xl p-6 md:p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all scale-95 opacity-0">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-title font-bold text-primary">添加新作品</h3>
+                    <button id="closeModalBtn" class="text-gray-500 hover:text-gray-700 text-xl">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                
+                <form id="poemForm">
+                    <input type="hidden" id="editingPoemId">
+                    <div class="mb-4">
+                        <label for="poemType" class="block text-gray-700 mb-2">作品类型</label>
+                        <select id="poemType" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option value="modern">诗</option>
+                            <option value="classic">词</option>
+                            <option value="couplet">楹联</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="poemTitle" class="block text-gray-700 mb-2">标题</label>
+                        <input type="text" id="poemTitle" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="输入作品标题" required>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="poemDate" class="block text-gray-700 mb-2">创作日期</label>
+                        <input type="date" id="poemDate" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="poemContent" class="block text-gray-700 mb-2">内容</label>
+                        <textarea id="poemContent" rows="6" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="输入作品内容&#10;楹联请按换行区分上下联" required></textarea>
+                    </div>
+                    
+                    <button type="submit" id="submitPoemBtn" class="w-full bg-primary hover:bg-primary/90 text-white py-3 rounded-lg transition-all font-medium">
+                        保存作品
+                    </button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-6">
+                <i class="fa fa-book text-4xl text-primary mb-4"></i>
+                <h3 class="text-xl font-title font-bold">我的诗词联作品集</h3>
+            </div>
+            <p class="text-gray-400 max-w-md mx-auto mb-6">
+                用文字记录生活，用诗意装点人生。感谢您的驻足与欣赏。
+            </p>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                    <i class="fa fa-github text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                    <i class="fa fa-envelope text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-400 hover:text-primary transition-colors">
+                    <i class="fa fa-weixin text-xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 mt-6 text-sm">
+                &copy; 2023 诗词联作品集 | 精心创作，用心分享
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const API_ENDPOINT = '/api/poems';
+        // 部署到 GitHub Pages 时，可填写 Render 后端地址，例如：https://your-service.onrender.com
+        const RENDER_API_ORIGIN = '';
+
+        function normalizeOrigin(value) {
+            if (!value) {
+                return null;
+            }
+
+            return String(value).trim().replace(/\/+$/, '');
+        }
+
+        const API_ORIGIN_CANDIDATES = [
+            normalizeOrigin(RENDER_API_ORIGIN),
+            window.location.protocol === 'file:' ? null : window.location.origin,
+            'http://127.0.0.1:3000',
+            'http://localhost:3000'
+        ].filter((value, index, array) => value && array.indexOf(value) === index);
+        const LEGACY_STORAGE_KEY = 'poetry-gallery-items-v1';
+        const INITIAL_DISPLAY_LIMIT = 3;
+        const OFFLINE_POEMS = [
+            {
+                id: 'default-modern-1',
+                type: 'modern',
+                title: '夜难寐',
+                date: '2024-11-03',
+                content: '岁末辛劳晚，寒衾入睡迟。\n凄风冰雨夜，冻雪冷霜时。\n亘古须臾客，言愁未免痴。\n明朝应好日，切莫再凝眉。'
+            },
+            {
+                id: 'default-modern-2',
+                type: 'modern',
+                title: '冰花',
+                date: '2025-01-28',
+                content: '寒夜霜风乱，清晨冻雪临。\n冰花凭自起，连理满窗林。'
+            },
+            {
+                id: 'default-modern-3',
+                type: 'modern',
+                title: '金鱼',
+                date: '2025-07-11',
+                content: '水声终不绝，家有一池鱼。\n似玉两睛闪，如纱双尾虚。\n金鳞翻浪跃，丹觜傍沙嘘。\n食饵争浮上，厌厌鼓腹初。'
+            },
+            {
+                id: 'default-classic-1',
+                type: 'classic',
+                title: '春日偶成',
+                date: '2023-03-15',
+                content: '（在此处填写您的古典诗词内容）'
+            },
+            {
+                id: 'default-classic-2',
+                type: 'classic',
+                title: '中秋望月',
+                date: '2022-09-10',
+                content: '（在此处填写您的古典诗词内容）'
+            },
+            {
+                id: 'default-classic-3',
+                type: 'classic',
+                title: '客行',
+                date: '2023-01-28',
+                content: '（在此处填写您的古典诗词内容）'
+            },
+            {
+                id: 'default-couplet-1',
+                type: 'couplet',
+                title: '书房联',
+                date: '2023-02-05',
+                content: '（上联内容）\n（下联内容）'
+            },
+            {
+                id: 'default-couplet-2',
+                type: 'couplet',
+                title: '新春联',
+                date: '2023-01-10',
+                content: '（上联内容）\n（下联内容）'
+            },
+            {
+                id: 'default-couplet-3',
+                type: 'couplet',
+                title: '山水联',
+                date: '2022-10-03',
+                content: '（上联内容）\n（下联内容）'
+            }
+        ];
+
+        // 导航栏滚动效果
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('bg-white', 'shadow');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow');
+            }
+        });
+
+        const addPoemBtn = document.getElementById('addPoemBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const addPoemModal = document.getElementById('addPoemModal');
+        const poemForm = document.getElementById('poemForm');
+        const poemModalTitle = document.querySelector('#addPoemModal h3');
+        const submitPoemBtn = document.getElementById('submitPoemBtn');
+        const editingPoemIdInput = document.getElementById('editingPoemId');
+        const poemTypeInput = document.getElementById('poemType');
+        const poemTitleInput = document.getElementById('poemTitle');
+        const poemDateInput = document.getElementById('poemDate');
+        const poemContentInput = document.getElementById('poemContent');
+        const modalPanel = addPoemModal.querySelector('div');
+        const searchInput = document.getElementById('searchInput');
+        const sortOrderInput = document.getElementById('sortOrder');
+        const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+        const syncStatus = document.getElementById('syncStatus');
+
+        let poems = [];
+        let activeSearch = '';
+        let activeSort = 'date-desc';
+        let resolvedApiOrigin = null;
+
+        addPoemBtn.addEventListener('click', () => openModal());
+        closeModalBtn.addEventListener('click', closeModal);
+        addPoemModal.addEventListener('click', (e) => {
+            if (e.target === addPoemModal) {
+                closeModal();
+            }
+        });
+
+        searchInput.addEventListener('input', (event) => {
+            activeSearch = event.target.value.trim().toLowerCase();
+            renderPoems();
+        });
+
+        sortOrderInput.addEventListener('change', (event) => {
+            activeSort = event.target.value;
+            renderPoems();
+        });
+
+        resetFiltersBtn.addEventListener('click', () => {
+            activeSearch = '';
+            activeSort = 'date-desc';
+            searchInput.value = '';
+            sortOrderInput.value = activeSort;
+            renderPoems();
+        });
+
+        document.addEventListener('click', async (event) => {
+            const actionButton = event.target.closest('[data-action]');
+
+            if (!actionButton) {
+                return;
+            }
+
+            const poemId = actionButton.dataset.id;
+            const action = actionButton.dataset.action;
+            const poem = poems.find((item) => item.id === poemId);
+
+            if (!poem) {
+                return;
+            }
+
+            if (action === 'edit') {
+                openModal(poem);
+                return;
+            }
+
+            if (action === 'delete' && window.confirm(`确定删除《${poem.title}》吗？`)) {
+                try {
+                    setStatus('正在删除作品...', 'neutral');
+                    await requestJson(`${API_ENDPOINT}/${encodeURIComponent(poemId)}`, { method: 'DELETE' });
+                    poems = poems.filter((item) => item.id !== poemId);
+                    renderPoems();
+                    setStatus(`《${poem.title}》已从档案库删除。`, 'success');
+                } catch (error) {
+                    console.error(error);
+                    setStatus(error.message || '删除失败，请稍后重试。', 'error');
+                }
+            }
+        });
+
+        function setStatus(message, tone = 'neutral') {
+            const toneClassMap = {
+                neutral: 'bg-slate-100 text-slate-600',
+                success: 'bg-emerald-100 text-emerald-700',
+                error: 'bg-rose-100 text-rose-700'
+            };
+
+            syncStatus.className = `mt-4 rounded-xl px-4 py-3 text-sm ${toneClassMap[tone] || toneClassMap.neutral}`;
+            syncStatus.textContent = message;
+        }
+
+        function normalizePoem(poem) {
+            return {
+                id: poem.id || `poem-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`,
+                type: ['modern', 'classic', 'couplet'].includes(poem.type) ? poem.type : 'modern',
+                title: poem.title || '未命名作品',
+                date: normalizeDateValue(poem.date),
+                content: typeof poem.content === 'string' ? poem.content.replace(/\r\n/g, '\n') : ''
+            };
+        }
+
+        function normalizeDateValue(value) {
+            if (!value) {
+                return getTodayValue();
+            }
+
+            if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+                return value;
+            }
+
+            const match = String(value).match(/^(\d{4})[./-](\d{1,2})[./-](\d{1,2})$/);
+            if (!match) {
+                return getTodayValue();
+            }
+
+            const [, year, month, day] = match;
+            return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+        }
+
+        function getTodayValue() {
+            const today = new Date();
+            return `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+        }
+
+        function formatDisplayDate(value) {
+            const normalizedDate = normalizeDateValue(value);
+            const [year, month, day] = normalizedDate.split('-');
+            return `${year}.${month}.${day}`;
+        }
+
+        function getTypeMeta(type) {
+            switch (type) {
+                case 'classic':
+                    return {
+                        label: '词',
+                        containerId: 'classicPoems',
+                        borderColor: 'border-classic',
+                        bgColor: 'bg-amber-50/80',
+                        textColor: 'text-classic',
+                        ringColor: 'ring-classic',
+                        icon: 'fa-pagelines'
+                    };
+                case 'couplet':
+                    return {
+                        label: '楹联',
+                        containerId: 'couplets',
+                        borderColor: 'border-secondary',
+                        bgColor: 'bg-pink-50/80',
+                        textColor: 'text-secondary',
+                        ringColor: 'ring-secondary',
+                        icon: 'fa-pencil'
+                    };
+                default:
+                    return {
+                        label: '诗',
+                        containerId: 'modernPoems',
+                        borderColor: 'border-primary',
+                        bgColor: '',
+                        textColor: 'text-primary',
+                        ringColor: 'ring-primary',
+                        icon: 'fa-leaf'
+                    };
+            }
+        }
+
+        function getFilteredPoems() {
+            const matchedPoems = poems.filter((poem) => {
+                if (!activeSearch) {
+                    return true;
+                }
+
+                const meta = getTypeMeta(poem.type);
+                const haystack = [poem.title, poem.content, meta.label, formatDisplayDate(poem.date)]
+                    .join(' ')
+                    .toLowerCase();
+
+                return haystack.includes(activeSearch);
+            });
+
+            matchedPoems.sort((left, right) => {
+                const dateOrder = left.date.localeCompare(right.date);
+                if (dateOrder !== 0) {
+                    return activeSort === 'date-asc' ? dateOrder : -dateOrder;
+                }
+
+                return activeSort === 'date-asc'
+                    ? left.id.localeCompare(right.id)
+                    : right.id.localeCompare(left.id);
+            });
+
+            if (activeSearch) {
+                return matchedPoems;
+            }
+
+            const perTypeCounter = {
+                modern: 0,
+                classic: 0,
+                couplet: 0
+            };
+
+            return matchedPoems.filter((poem) => {
+                if (perTypeCounter[poem.type] >= INITIAL_DISPLAY_LIMIT) {
+                    return false;
+                }
+
+                perTypeCounter[poem.type] += 1;
+                return true;
+            });
+        }
+
+        function renderEmptyState(container, message) {
+            const emptyState = document.createElement('div');
+            emptyState.className = 'col-span-full rounded-2xl border border-dashed border-gray-300 bg-white/60 p-8 text-center text-gray-500';
+            emptyState.textContent = message;
+            container.appendChild(emptyState);
+        }
+
+        function renderPoems() {
+            const containers = {
+                modern: document.getElementById('modernPoems'),
+                classic: document.getElementById('classicPoems'),
+                couplet: document.getElementById('couplets')
+            };
+
+            const visiblePoems = getFilteredPoems();
+            const sectionCounts = { modern: 0, classic: 0, couplet: 0 };
+
+            Object.values(containers).forEach((container) => {
+                container.innerHTML = '';
+            });
+
+            visiblePoems.forEach((poem) => {
+                sectionCounts[poem.type] += 1;
+                containers[poem.type].appendChild(createPoemCard(poem));
+            });
+
+            if (!sectionCounts.modern) {
+                renderEmptyState(containers.modern, activeSearch ? '没有匹配到诗作。' : '还没有诗作，先写下第一首吧。');
+            }
+
+            if (!sectionCounts.classic) {
+                renderEmptyState(containers.classic, activeSearch ? '没有匹配到词作。' : '还没有词作，先补上一阕。');
+            }
+
+            if (!sectionCounts.couplet) {
+                renderEmptyState(containers.couplet, activeSearch ? '没有匹配到楹联。' : '还没有楹联，先添一副。');
+            }
+        }
+
+        function createPoemCard(poem) {
+            const meta = getTypeMeta(poem.type);
+            const card = document.createElement('div');
+            card.className = `poetry-card border-t-4 ${meta.borderColor} ${meta.bgColor} animate-fadeInUp`;
+            card.dataset.id = poem.id;
+
+            const header = document.createElement('div');
+            header.className = 'flex justify-between items-start gap-4 mb-4';
+
+            const title = document.createElement('h4');
+            title.className = `text-xl font-bold ${meta.textColor}`;
+            title.textContent = poem.title;
+
+            const metaBox = document.createElement('div');
+            metaBox.className = 'flex flex-col items-end gap-2 shrink-0';
+
+            const date = document.createElement('span');
+            date.className = 'text-sm text-gray-500';
+            date.textContent = formatDisplayDate(poem.date);
+
+            const actions = document.createElement('div');
+            actions.className = 'flex items-center gap-2';
+            actions.appendChild(createActionButton('编辑', 'edit', poem.id));
+            actions.appendChild(createActionButton('删除', 'delete', poem.id));
+
+            metaBox.appendChild(date);
+            metaBox.appendChild(actions);
+            header.appendChild(title);
+            header.appendChild(metaBox);
+            card.appendChild(header);
+
+            if (poem.type === 'couplet') {
+                const lines = poem.content.split('\n');
+                const upperLine = lines[0] || '（请添加上联）';
+                const lowerLine = lines.slice(1).join('\n') || '（请添加下联）';
+
+                const upperParagraph = document.createElement('p');
+                upperParagraph.className = 'text-gray-700 leading-relaxed mb-2 text-right whitespace-pre-line';
+                upperParagraph.textContent = upperLine;
+
+                const lowerParagraph = document.createElement('p');
+                lowerParagraph.className = 'text-gray-700 leading-relaxed mb-4 text-left whitespace-pre-line';
+                lowerParagraph.textContent = lowerLine;
+
+                card.appendChild(upperParagraph);
+                card.appendChild(lowerParagraph);
+            } else {
+                const content = document.createElement('p');
+                content.className = `text-gray-700 leading-relaxed mb-4 whitespace-pre-line ${poem.type === 'classic' ? 'text-center' : ''}`.trim();
+                content.textContent = poem.content;
+                card.appendChild(content);
+            }
+
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = `flex justify-end ${meta.textColor}`;
+
+            const icon = document.createElement('i');
+            icon.className = `fa ${meta.icon}`;
+            iconWrapper.appendChild(icon);
+            card.appendChild(iconWrapper);
+
+            return card;
+        }
+
+        function createActionButton(label, action, poemId) {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = 'text-xs px-2 py-1 rounded-md border border-gray-200 text-gray-500 hover:text-primary hover:border-primary transition-colors';
+            button.dataset.action = action;
+            button.dataset.id = poemId;
+            button.textContent = label;
+            return button;
+        }
+
+        function openModal(poem) {
+            const currentPoem = poem ? normalizePoem(poem) : null;
+
+            editingPoemIdInput.value = currentPoem ? currentPoem.id : '';
+            poemTypeInput.value = currentPoem ? currentPoem.type : 'modern';
+            poemTitleInput.value = currentPoem ? currentPoem.title : '';
+            poemDateInput.value = currentPoem ? currentPoem.date : getTodayValue();
+            poemContentInput.value = currentPoem ? currentPoem.content : '';
+            poemModalTitle.textContent = currentPoem ? '编辑作品' : '添加新作品';
+            submitPoemBtn.textContent = currentPoem ? '更新作品' : '保存作品';
+
+            addPoemModal.classList.remove('hidden');
+            setTimeout(() => {
+                modalPanel.classList.add('scale-100');
+                modalPanel.classList.remove('scale-95', 'opacity-0');
+            }, 10);
+        }
+
+        function closeModal() {
+            modalPanel.classList.remove('scale-100');
+            modalPanel.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => {
+                addPoemModal.classList.add('hidden');
+                poemForm.reset();
+                editingPoemIdInput.value = '';
+                poemDateInput.value = getTodayValue();
+                poemModalTitle.textContent = '添加新作品';
+                submitPoemBtn.textContent = '保存作品';
+            }, 300);
+        }
+
+        function buildApiUrl(pathname, origin) {
+            return new URL(pathname, `${origin}/`).toString();
+        }
+
+        async function resolveApiOrigin(forceRetry = false) {
+            if (resolvedApiOrigin && !forceRetry) {
+                return resolvedApiOrigin;
+            }
+
+            let lastError = null;
+
+            for (const origin of API_ORIGIN_CANDIDATES) {
+                try {
+                    const response = await fetch(buildApiUrl(API_ENDPOINT, origin), {
+                        method: 'GET',
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (!response.ok) {
+                        lastError = new Error(`${origin} 返回 ${response.status}`);
+                        continue;
+                    }
+
+                    resolvedApiOrigin = origin;
+                    return resolvedApiOrigin;
+                } catch (error) {
+                    lastError = error;
+                }
+            }
+
+            throw new Error(lastError && lastError.message
+                ? `无法连接档案库：${lastError.message}`
+                : '无法连接档案库，请先在 My_website 目录运行 npm start。');
+        }
+
+        async function requestJson(url, options = {}) {
+            const apiOrigin = await resolveApiOrigin();
+            const requestUrl = /^https?:\/\//i.test(url) ? url : buildApiUrl(url.replace(/^\//, ''), apiOrigin);
+
+            let response;
+
+            try {
+                response = await fetch(requestUrl, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(options.headers || {})
+                    },
+                    ...options
+                });
+            } catch (error) {
+                resolvedApiOrigin = null;
+                throw new Error('无法连接档案库，请确认本地服务已启动。');
+            }
+
+            if (response.status === 204) {
+                return null;
+            }
+
+            const responseText = await response.text();
+            let payload = null;
+
+            if (responseText) {
+                try {
+                    payload = JSON.parse(responseText);
+                } catch {
+                    payload = responseText;
+                }
+            }
+
+            if (!response.ok) {
+                const message = payload && typeof payload === 'object' ? payload.message : payload;
+                throw new Error(message || '请求失败，请稍后重试。');
+            }
+
+            return payload;
+        }
+
+        async function migrateLegacyLocalPoems() {
+            if (!window.localStorage) {
+                return;
+            }
+
+            const rawLegacyPoems = localStorage.getItem(LEGACY_STORAGE_KEY);
+            if (!rawLegacyPoems) {
+                return;
+            }
+
+            try {
+                const legacyPoems = JSON.parse(rawLegacyPoems);
+                if (!Array.isArray(legacyPoems) || !legacyPoems.length) {
+                    return;
+                }
+
+                const serverPoemMap = new Map(poems.map((poem) => [poem.id, poem]));
+                let hasChanges = false;
+
+                for (const legacyPoem of legacyPoems.map(normalizePoem)) {
+                    const currentPoem = serverPoemMap.get(legacyPoem.id);
+                    const sameContent = currentPoem && JSON.stringify(currentPoem) === JSON.stringify(legacyPoem);
+
+                    if (sameContent) {
+                        continue;
+                    }
+
+                    if (currentPoem) {
+                        await requestJson(`${API_ENDPOINT}/${encodeURIComponent(legacyPoem.id)}`, {
+                            method: 'PUT',
+                            body: JSON.stringify(legacyPoem)
+                        });
+                    } else {
+                        await requestJson(API_ENDPOINT, {
+                            method: 'POST',
+                            body: JSON.stringify(legacyPoem)
+                        });
+                    }
+
+                    hasChanges = true;
+                }
+
+                if (hasChanges) {
+                    poems = (await requestJson(API_ENDPOINT)).map(normalizePoem);
+                    setStatus('已将旧浏览器存档迁移到本地档案库。', 'success');
+                }
+
+                localStorage.removeItem(LEGACY_STORAGE_KEY);
+            } catch (error) {
+                console.error(error);
+                setStatus('旧浏览器存档迁移失败，可继续使用当前档案库。', 'error');
+            }
+        }
+
+        async function loadPoems() {
+            try {
+                setStatus('正在从档案库加载作品...', 'neutral');
+                await resolveApiOrigin(true);
+                poems = (await requestJson(API_ENDPOINT)).map(normalizePoem);
+                await migrateLegacyLocalPoems();
+                renderPoems();
+                setStatus(`档案库已连接（${resolvedApiOrigin}），当前共 ${poems.length} 篇作品。`, 'success');
+            } catch (error) {
+                console.error(error);
+                poems = OFFLINE_POEMS.map(normalizePoem);
+                renderPoems();
+                setStatus('无法连接档案库，已切换离线展示模式。可填写 RENDER_API_ORIGIN 或在项目目录运行 npm start 后刷新页面恢复在线读写。', 'error');
+            }
+        }
+
+        poemForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const poemId = editingPoemIdInput.value;
+            const poem = {
+                id: poemId || `poem-${Date.now()}`,
+                type: poemTypeInput.value,
+                title: poemTitleInput.value.trim(),
+                date: normalizeDateValue(poemDateInput.value),
+                content: poemContentInput.value.replace(/\r\n/g, '\n').trim()
+            };
+
+            if (!poem.title || !poem.content) {
+                window.alert('请完整填写标题和内容。');
+                return;
+            }
+
+            submitPoemBtn.disabled = true;
+            submitPoemBtn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            try {
+                setStatus(poemId ? '正在更新作品...' : '正在保存作品...', 'neutral');
+                const savedPoem = await requestJson(poemId ? `${API_ENDPOINT}/${encodeURIComponent(poemId)}` : API_ENDPOINT, {
+                    method: poemId ? 'PUT' : 'POST',
+                    body: JSON.stringify(poem)
+                });
+
+                if (poemId) {
+                    poems = poems.map((item) => (item.id === poemId ? normalizePoem(savedPoem) : item));
+                } else {
+                    poems.push(normalizePoem(savedPoem));
+                }
+
+                renderPoems();
+                closeModal();
+                setStatus(poemId ? `《${savedPoem.title}》已更新并写入档案库。` : `《${savedPoem.title}》已保存到档案库。`, 'success');
+
+                setTimeout(() => {
+                    const newPoem = document.querySelector(`[data-id="${savedPoem.id}"]`);
+                    if (!newPoem) {
+                        return;
+                    }
+
+                    const meta = getTypeMeta(savedPoem.type);
+                    newPoem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    newPoem.classList.add('ring-2', meta.ringColor);
+                    setTimeout(() => {
+                        newPoem.classList.remove('ring-2', meta.ringColor);
+                    }, 2000);
+                }, 300);
+            } catch (error) {
+                console.error(error);
+                setStatus(error.message || '保存失败，请稍后重试。', 'error');
+            } finally {
+                submitPoemBtn.disabled = false;
+                submitPoemBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            poemDateInput.value = getTodayValue();
+            renderPoems();
+            await loadPoems();
+        });
+    </script>
+</body>
+</html>

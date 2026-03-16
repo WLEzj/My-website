@@ -1,0 +1,9 @@
+{
+  "name": "poetry-gallery",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Simple file-backed poetry gallery server",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
